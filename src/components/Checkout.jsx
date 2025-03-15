@@ -18,12 +18,32 @@ export default function Checkout() {
     hideCheckout();
   }
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    const checkoutFormData = new FormData(event.target);
+    const customFormData = Object.fromEntries(checkoutFormData.entries());
+    const SendOrderURL = "http://localhost:3000/orders";
+    const orderData = {
+      order: {
+        items: cartState,
+        customer: customFormData,
+      },
+    };
+    fetch(SendOrderURL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(orderData),
+    });
+  }
+
   return (
     <Modal open={progress === "checkout"} onClose={handleCloseCheckout}>
-      <form>
+      <form onSubmit={handleSubmit}>
         <h2>Checkout</h2>
         <p>Total amount: {currencyFormatter.format(cartTotal)}</p>
-        <Input label="Full Name" type="text" id="full-name" />
+        <Input label="Full Name" type="text" id="name" />
         <Input label="Email Address" type="email" id="email" />
         <Input label="Street" type="text" id="street" />
         <div className="control-row">
