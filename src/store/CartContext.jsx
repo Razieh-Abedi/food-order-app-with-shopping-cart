@@ -26,10 +26,14 @@ const cartReducer = (state, action) => {
     return { ...state, items: updatedItems };
   } else if (action.type === "REMOVE_ITEM") {
     const existingCartItemIndex = state.items.findIndex(
-      (item) => item.id === action.item.id
+      (item) => item.id === action.id
     );
 
     const existingCartItem = state.items[existingCartItemIndex];
+
+    // if (existingCartItemIndex === -1) {
+    //   return state;
+    // }
 
     const updatedItems = [...state.items];
     if (existingCartItem.quantity === 1) {
@@ -70,7 +74,6 @@ const CartContextProvider = ({ children }) => {
     addItem,
     removeItem,
   };
-
 
   return (
     <CartContext.Provider value={cartContextValues}>
