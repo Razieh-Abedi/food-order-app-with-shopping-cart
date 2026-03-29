@@ -11,6 +11,8 @@ This project is a React-based shopping cart application that demonstrates variou
 - **Context API for State Management**: Using React's Context API to manage global state across the application.
 - **Custom Reusable UI Components**: Building modular and reusable UI components for a maintainable codebase.
 
+![Demo](src/assets//demo.gif)
+
 ## Features
 
 - Add and remove items from the shopping cart
